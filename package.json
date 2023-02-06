@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "workspaces": [
+    "vendor/*"
+  ],
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holepunchto/pearjs-ios.git"
+  },
+  "author": "Holepunch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/holepunchto/pearjs-ios/issues"
+  },
+  "homepage": "https://github.com/holepunchto/pearjs-ios#readme",
+  "devDependencies": {
+    "brittle": "^3.1.0",
+    "standard": "^17.0.0"
+  }
+}
