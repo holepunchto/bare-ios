@@ -16,7 +16,6 @@ const s = new ScriptLinker({
   },
   mapResolve (req) {
     if (req === 'events') return '@pearjs/events'
-    if (req === 'fs') return '@pearjs/fs'
     if (req === 'path') return '@pearjs/path'
     return req
   },
