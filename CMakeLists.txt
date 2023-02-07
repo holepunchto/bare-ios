@@ -65,6 +65,12 @@ target_link_libraries(
     $<LINK_LIBRARY:WHOLE_ARCHIVE,pear_static>
 )
 
+link_pear_module(
+  pear_ios_bin
+  fx_native
+  node_modules/fx-native
+)
+
 install(
   TARGETS pear_ios_bin
   BUNDLE DESTINATION ${PEAR_PLATFORM}
