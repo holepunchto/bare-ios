@@ -6,11 +6,11 @@ if(WIN32)
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
 
-project(pear_ios C)
+project(pear_ios C CXX)
 
 include(pear)
 
-set(PEAR_USE_JAVASCRIPTCORE ON)
+pear_target(target)
 
 add_subdirectory(vendor/pearjs EXCLUDE_FROM_ALL)
 
@@ -73,10 +73,10 @@ link_pear_module(
 
 install(
   TARGETS pear_ios_bin
-  BUNDLE DESTINATION ${PEAR_PLATFORM}
+  BUNDLE DESTINATION ${target}
 )
 
 install(
   FILES bin/Info.plist
-  DESTINATION ${PEAR_PLATFORM}/Pear.app
+  DESTINATION ${target}/Pear.app
 )
