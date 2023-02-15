@@ -1,5 +1,3 @@
-process.addon.dynamic = false
-
 const { App } = require('fx-native')
 
 const app = App.shared()

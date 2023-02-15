@@ -23,14 +23,13 @@ set_target_properties(
   POSITION_INDEPENDENT_CODE ON
 )
 
-find_program(node NAMES node)
+find_program(pear_dev NAMES pear-dev)
 
 add_custom_command(
-  COMMAND ${node} scripts/link.mjs
+  COMMAND ${pear_dev} bundle -t c -o bin/main.bundle.h src/app.js
   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
   OUTPUT
-    ${PROJECT_SOURCE_DIR}/bin/app.js
-    ${PROJECT_SOURCE_DIR}/bin/app.js.h
+    ${PROJECT_SOURCE_DIR}/bin/main.bundle.h
   DEPENDS
     src/app.js
   VERBATIM
@@ -39,7 +38,7 @@ add_custom_command(
 target_sources(
   pear_ios
   PRIVATE
-    bin/app.js.h
+    bin/main.bundle.h
     bin/main.c
 )
 
