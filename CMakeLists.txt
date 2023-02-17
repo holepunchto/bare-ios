@@ -50,8 +50,6 @@ target_include_directories(
 
 add_executable(pear_ios_bin $<TARGET_OBJECTS:pear_ios>)
 
-add_debug_options(pear_ios_bin)
-
 set_target_properties(
   pear_ios_bin
   PROPERTIES

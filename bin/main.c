@@ -8,7 +8,9 @@ main (int argc, char *argv[]) {
   pear_t pear;
   pear_setup(uv_default_loop(), &pear, argc, argv);
 
-  pear_run(&pear, "main.bundle", (char *) bundle, bundle_len);
+  uv_buf_t source = uv_buf_init((char *) bundle, bundle_len);
+
+  pear_run(&pear, "main.bundle", &source);
 
   int exit_code;
   pear_teardown(&pear, &exit_code);
