@@ -10,7 +10,7 @@ main (int argc, char *argv[]) {
 
   uv_buf_t source = uv_buf_init((char *) bundle, bundle_len);
 
-  pear_run(&pear, "main.bundle", &source);
+  pear_run(&pear, "/main.bundle", &source);
 
   int exit_code;
   pear_teardown(&pear, &exit_code);

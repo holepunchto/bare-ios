@@ -17,16 +17,10 @@ set_target_properties(
   POSITION_INDEPENDENT_CODE ON
 )
 
-find_program(pear_dev NAMES pear-dev)
-
-add_custom_command(
-  COMMAND ${pear_dev} bundle -t c -o bin/main.bundle.h src/app.js
-  WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-  OUTPUT
-    ${PROJECT_SOURCE_DIR}/bin/main.bundle.h
-  DEPENDS
-    src/app.js
-  VERBATIM
+add_pear_bundle(
+  ENTRY src/app.js
+  OUT bin/main.bundle.h
+  TARGET c
 )
 
 target_sources(
