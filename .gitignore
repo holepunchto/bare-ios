@@ -4,3 +4,4 @@ coverage/
 prebuilds/
 scratch/
 package-lock.json
+*.bundle.h
