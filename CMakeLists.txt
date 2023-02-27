@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(pear_ios C CXX)
+project(
+  pear_ios
+  VERSION 1.0
+  LANGUAGES C CXX
+)
 
 include(pear)
 
@@ -42,6 +46,12 @@ set_target_properties(
   pear_ios_bin
   PROPERTIES
   OUTPUT_NAME Pear
+
+  MACOSX_BUNDLE_BUNDLE_NAME Pear
+  MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+  MACOSX_BUNDLE_INFO_STRING ${PROJECT_VERSION}
+  MACOSX_BUNDLE_LONG_VERSION_STRING ${PROJECT_VERSION}
+  MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
 )
 
 target_link_libraries(
@@ -59,9 +69,4 @@ link_pear_module(
 install(
   TARGETS pear_ios_bin
   BUNDLE DESTINATION ${target}
-)
-
-install(
-  FILES bin/Info.plist
-  DESTINATION ${target}/Pear.app
 )
