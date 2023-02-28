@@ -1,10 +1,17 @@
 {
   "private": true,
+  "name": "pearjs-ios",
+  "version": "0.0.0",
+  "description": "Example of embedding 🍐.js in an iOS application",
   "workspaces": [
     "vendor/*"
   ],
   "scripts": {
-    "test": "standard"
+    "test": "standard",
+    "install": "pear-dev vendor sync",
+    "configure": "pear-dev configure --platform ios",
+    "build": "pear-dev build",
+    "start": "pear-dev ios run build/Pear.app"
   },
   "repository": {
     "type": "git",
