@@ -11,7 +11,7 @@
     "install": "pear-dev vendor sync",
     "configure": "pear-dev configure --platform ios",
     "build": "pear-dev build",
-    "start": "pear-dev ios run build/Pear.app"
+    "start": "pear-dev ios run"
   },
   "repository": {
     "type": "git",
