@@ -4,4 +4,4 @@ Example of embedding :pear:.js in an iOS application. It uses <https://github.co
 
 ## License
 
-ISC
+Apache-2.0

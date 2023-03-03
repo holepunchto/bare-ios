@@ -18,7 +18,7 @@
     "url": "git+https://github.com/holepunchto/pearjs-ios.git"
   },
   "author": "Holepunch",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/holepunchto/pearjs-ios/issues"
   },
