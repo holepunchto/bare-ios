@@ -22,16 +22,16 @@ set_target_properties(
 )
 
 add_pear_bundle(
-  ENTRY src/app.js
-  OUT bin/main.bundle.h
+  ENTRY app/app.js
+  OUT app/main.bundle.h
   TARGET c
 )
 
 target_sources(
   pear_ios
   PRIVATE
-    bin/main.bundle.h
-    bin/main.c
+    app/main.bundle.h
+    app/main.c
 )
 
 target_include_directories(
