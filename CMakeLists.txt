@@ -1,54 +1,54 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(
-  pear_ios
+  bare_ios
   VERSION 1.0
   LANGUAGES C CXX
 )
 
-include(pear)
+include(bare)
 
-pear_target(target)
+bare_target(target)
 
-add_subdirectory(vendor/pearjs EXCLUDE_FROM_ALL)
+add_subdirectory(vendor/bare EXCLUDE_FROM_ALL)
 
-add_library(pear_ios OBJECT)
+add_library(bare_ios OBJECT)
 
 set_target_properties(
-  pear_ios
+  bare_ios
   PROPERTIES
   C_STANDARD 99
   POSITION_INDEPENDENT_CODE ON
 )
 
-add_pear_bundle(
+add_bare_bundle(
   ENTRY app/app.js
   OUT app/main.bundle.h
   TARGET c
 )
 
 target_sources(
-  pear_ios
+  bare_ios
   PRIVATE
     app/main.bundle.h
     app/main.c
 )
 
 target_include_directories(
-  pear_ios
+  bare_ios
   PUBLIC
-    $<TARGET_PROPERTY:pear,INTERFACE_INCLUDE_DIRECTORIES>
+    $<TARGET_PROPERTY:bare,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
-add_executable(pear_ios_bin $<TARGET_OBJECTS:pear_ios>)
+add_executable(bare_ios_bin $<TARGET_OBJECTS:bare_ios>)
 
 set_target_properties(
-  pear_ios_bin
+  bare_ios_bin
   PROPERTIES
-  OUTPUT_NAME Pear
+  OUTPUT_NAME bare
 
-  MACOSX_BUNDLE_GUI_IDENTIFIER Pear
-  MACOSX_BUNDLE_BUNDLE_NAME Pear
+  MACOSX_BUNDLE_GUI_IDENTIFIER bare
+  MACOSX_BUNDLE_BUNDLE_NAME bare
   MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
   MACOSX_BUNDLE_INFO_STRING ${PROJECT_VERSION}
   MACOSX_BUNDLE_LONG_VERSION_STRING ${PROJECT_VERSION}
@@ -56,18 +56,18 @@ set_target_properties(
 )
 
 target_link_libraries(
-  pear_ios_bin
+  bare_ios_bin
   PRIVATE
-    $<LINK_LIBRARY:WHOLE_ARCHIVE,pear_static>
+    $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
 
-link_pear_module(
-  pear_ios_bin
+link_bare_module(
+  bare_ios_bin
   fx_native
   node_modules/fx-native
 )
 
 install(
-  TARGETS pear_ios_bin
+  TARGETS bare_ios_bin
   BUNDLE DESTINATION ${target}
 )
