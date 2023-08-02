@@ -22,7 +22,7 @@ set_target_properties(
 )
 
 add_bare_bundle(
-  ENTRY app/app.js
+  ENTRY app/main.js
   OUT app/main.bundle.h
   TARGET c
 )
@@ -59,12 +59,6 @@ target_link_libraries(
   bare_ios_bin
   PRIVATE
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
-)
-
-link_bare_module(
-  bare_ios_bin
-  fx_native
-  node_modules/fx-native
 )
 
 install(

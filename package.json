@@ -23,9 +23,6 @@
     "url": "https://github.com/holepunchto/bare-ios/issues"
   },
   "homepage": "https://github.com/holepunchto/bare-ios#readme",
-  "dependencies": {
-    "fx-native": "^1.0.0"
-  },
   "devDependencies": {
     "brittle": "^3.1.0",
     "standard": "^17.0.0"
