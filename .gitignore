@@ -5,3 +5,4 @@ prebuilds/
 scratch/
 package-lock.json
 *.bundle.h
+*.d
