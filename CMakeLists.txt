@@ -40,7 +40,7 @@ target_include_directories(
     $<TARGET_PROPERTY:bare,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
-add_executable(bare_ios_bin $<TARGET_OBJECTS:bare_ios>)
+add_executable(bare_ios_bin)
 
 set_target_properties(
   bare_ios_bin
@@ -57,6 +57,8 @@ set_target_properties(
 
 target_link_libraries(
   bare_ios_bin
+  PUBLIC
+    bare_ios
   PRIVATE
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )

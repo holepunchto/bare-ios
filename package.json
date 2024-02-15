@@ -1,17 +1,9 @@
 {
   "private": true,
   "name": "bare-ios",
-  "version": "0.0.0",
   "description": "Example of embedding Bare in an iOS application",
-  "workspaces": [
-    "vendor/*"
-  ],
   "scripts": {
-    "test": "standard",
-    "install": "bare-dev vendor sync",
-    "configure": "bare-dev configure --platform ios",
-    "build": "bare-dev build",
-    "start": "bare-dev ios run"
+    "test": "standard"
   },
   "repository": {
     "type": "git",
@@ -24,7 +16,6 @@
   },
   "homepage": "https://github.com/holepunchto/bare-ios#readme",
   "devDependencies": {
-    "brittle": "^3.1.0",
     "standard": "^17.0.0"
   }
 }

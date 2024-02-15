@@ -3,6 +3,7 @@ build/
 coverage/
 prebuilds/
 scratch/
+install/
 package-lock.json
 *.bundle.h
 *.d
