@@ -1,0 +1,33 @@
+name: Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    strategy:
+      matrix:
+        node: [lts/*]
+        os: [macos-latest]
+        include:
+        - os: macos-latest
+          name: macos
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.name }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - uses: actions/cache@v4
+      with:
+        path: corestore
+        key: corestore-${{ matrix.name }}
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm install -g bare-dev
+    - run: bare-dev configure --debug --platform ios
+    - run: bare-dev build --debug
