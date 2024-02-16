@@ -14,7 +14,7 @@ jobs:
         os: [macos-latest]
         include:
         - os: macos-latest
-          name: macos
+          name: ios
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.name }}
     steps:
@@ -23,7 +23,7 @@ jobs:
         submodules: recursive
     - uses: actions/cache@v4
       with:
-        path: corestore
+        path: vendor/bare/corestore
         key: corestore-${{ matrix.name }}
     - uses: actions/setup-node@v4
       with:
