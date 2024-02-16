@@ -14,9 +14,10 @@ jobs:
         os: [macos-latest]
         include:
         - os: macos-latest
-          name: ios
+          platform: ios
+          arch: x64
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.name }}
+    name: ${{ matrix.platform }}-${{ matrix.arch }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -24,10 +25,10 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: vendor/bare/corestore
-        key: corestore-${{ matrix.name }}
+        key: corestore-${{ matrix.platform }}-${{ matrix.name }}
     - uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node }}
     - run: npm install -g bare-dev
-    - run: bare-dev configure --debug --platform ios --simulator --verbose
+    - run: bare-dev configure --debug --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} --simulator
     - run: bare-dev build --debug
