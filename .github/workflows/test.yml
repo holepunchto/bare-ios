@@ -29,5 +29,5 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
     - run: npm install -g bare-dev
-    - run: bare-dev configure --debug --platform ios --simulator
+    - run: bare-dev configure --debug --platform ios --simulator --verbose
     - run: bare-dev build --debug
