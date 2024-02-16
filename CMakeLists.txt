@@ -4,6 +4,8 @@ project(bare_ios LANGUAGES C)
 
 include(bare)
 
+install_node_modules()
+
 bare_target(target)
 
 add_subdirectory(vendor/bare EXCLUDE_FROM_ALL)
