@@ -53,8 +53,3 @@ target_link_libraries(
   PRIVATE
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
-
-install(
-  TARGETS bare_ios_bin
-  BUNDLE DESTINATION ${target}
-)
