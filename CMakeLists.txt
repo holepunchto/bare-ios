@@ -53,3 +53,5 @@ target_link_libraries(
   PRIVATE
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
+
+link_bare_modules(bare_ios_bin)
