@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(bare_ios LANGUAGES C)
+project(bare_ios LANGUAGES C VERSION 1.0)
 
 include(bare)
 
@@ -44,6 +44,10 @@ set_target_properties(
   bare_ios_bin
   PROPERTIES
   OUTPUT_NAME bare
+
+  MACOSX_BUNDLE_GUI_IDENTIFIER bare
+  MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+  MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
 )
 
 target_link_libraries(
