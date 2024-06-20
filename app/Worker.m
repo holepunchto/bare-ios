@@ -9,12 +9,17 @@
 - (void)main {
   int err;
 
+  int argc = 0;
+  char **argv = NULL;
+
+  argv = uv_setup_args(argc, argv);
+
   js_platform_t *platform;
   err = js_create_platform(uv_default_loop(), NULL, &platform);
   assert(err == 0);
 
   bare_t *bare;
-  err = bare_setup(uv_default_loop(), platform, NULL, 0, NULL, NULL, &bare);
+  err = bare_setup(uv_default_loop(), platform, NULL, argc, argv, NULL, &bare);
   assert(err == 0);
 
   uv_buf_t source = uv_buf_init((char *) bundle, bundle_len);
