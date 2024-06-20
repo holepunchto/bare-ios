@@ -1,21 +1,20 @@
-#include <assert.h>
-#include <bare.h>
-#include <uv.h>
+#import <bare.h>
 
-#include "main.bundle.h"
+#import "Worker.h"
 
-int
-main (int argc, char *argv[]) {
+#import "main.bundle.h"
+
+@implementation Worker
+
+- (void)main {
   int err;
-
-  argv = uv_setup_args(argc, argv);
 
   js_platform_t *platform;
   err = js_create_platform(uv_default_loop(), NULL, &platform);
   assert(err == 0);
 
   bare_t *bare;
-  err = bare_setup(uv_default_loop(), platform, NULL, argc, argv, NULL, &bare);
+  err = bare_setup(uv_default_loop(), platform, NULL, 0, NULL, NULL, &bare);
   assert(err == 0);
 
   uv_buf_t source = uv_buf_init((char *) bundle, bundle_len);
@@ -34,6 +33,6 @@ main (int argc, char *argv[]) {
 
   err = uv_loop_close(uv_default_loop());
   assert(err == 0);
-
-  return exit_code;
 }
+
+@end

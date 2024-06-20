@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(bare_ios LANGUAGES C VERSION 1.0)
+project(bare_ios LANGUAGES C OBJC VERSION 1.0)
 
 include(bare)
 
@@ -29,13 +29,24 @@ target_sources(
   bare_ios
   PRIVATE
     app/main.bundle.h
-    app/main.c
+    app/main.m
+    app/AppDelegate.h
+    app/AppDelegate.m
+    app/Worker.h
+    app/Worker.m
 )
 
 target_include_directories(
   bare_ios
   PUBLIC
     $<TARGET_PROPERTY:bare,INTERFACE_INCLUDE_DIRECTORIES>
+)
+
+target_link_libraries(
+  bare_ios
+  PUBLIC
+    "-framework Foundation"
+    "-framework UIKit"
 )
 
 add_executable(bare_ios_bin MACOSX_BUNDLE)
