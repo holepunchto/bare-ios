@@ -15,7 +15,14 @@
            source:[NSData dataWithBytes:bundle length:bundle_len]];
 
   _worklet.incoming.readabilityHandler = ^(NSFileHandle *handle) {
-    NSLog(@"%@", [handle availableData]);
+    NSData *data = handle.availableData;
+
+    if (data.length == 0) {
+      _worklet.incoming.readabilityHandler = nil;
+      return;
+    }
+
+    NSLog(@"%.*s", (int) data.length, (char *) data.bytes);
   };
 
   [_worklet.outgoing writeData:[[NSData alloc]

@@ -4,5 +4,5 @@ Bare
   .on('exit', () => console.log('exited'))
 
 Bare.IPC
-  .on('data', (data) => console.log(data))
+  .on('data', (data) => console.log(data.toString()))
   .write('Hello from Bare')
