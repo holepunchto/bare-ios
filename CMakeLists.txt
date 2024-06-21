@@ -8,7 +8,7 @@ install_node_modules()
 
 bare_target(target)
 
-add_subdirectory(vendor/bare EXCLUDE_FROM_ALL)
+add_subdirectory(vendor/bare-kit EXCLUDE_FROM_ALL)
 
 add_library(bare_ios OBJECT)
 
@@ -16,6 +16,7 @@ set_target_properties(
   bare_ios
   PROPERTIES
   C_STANDARD 99
+  OBJC_STANDARD 99
   POSITION_INDEPENDENT_CODE ON
 )
 
@@ -32,21 +33,18 @@ target_sources(
     app/main.m
     app/AppDelegate.h
     app/AppDelegate.m
-    app/Worker.h
-    app/Worker.m
-)
-
-target_include_directories(
-  bare_ios
-  PUBLIC
-    $<TARGET_PROPERTY:bare,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
 target_link_libraries(
   bare_ios
   PUBLIC
-    "-framework Foundation"
     "-framework UIKit"
+)
+
+target_include_directories(
+  bare_ios
+  PUBLIC
+    $<TARGET_PROPERTY:bare_kit,INTERFACE_INCLUDE_DIRECTORIES>
 )
 
 add_executable(bare_ios_bin MACOSX_BUNDLE)
@@ -65,6 +63,7 @@ target_link_libraries(
   bare_ios_bin
   PUBLIC
     bare_ios
+    bare_kit
   PRIVATE
     $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
