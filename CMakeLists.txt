@@ -37,14 +37,10 @@ target_sources(
 
 target_link_libraries(
   bare_ios
-  PUBLIC
+  INTERFACE
     "-framework UIKit"
-)
-
-target_include_directories(
-  bare_ios
   PUBLIC
-    $<TARGET_PROPERTY:bare_kit,INTERFACE_INCLUDE_DIRECTORIES>
+    bare_kit
 )
 
 add_executable(bare_ios_bin MACOSX_BUNDLE)
@@ -63,9 +59,6 @@ target_link_libraries(
   bare_ios_bin
   PUBLIC
     bare_ios
-    bare_kit
-  PRIVATE
-    $<LINK_LIBRARY:WHOLE_ARCHIVE,bare_static>
 )
 
 link_bare_modules(bare_ios_bin)
