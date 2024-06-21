@@ -33,4 +33,8 @@
   [_worklet resume];
 }
 
+- (void)applicationWillTerminate:(UIApplication *)application {
+  [_worklet terminate];
+}
+
 @end
