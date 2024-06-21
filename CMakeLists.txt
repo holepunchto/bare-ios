@@ -52,7 +52,7 @@ add_executable(bare_ios_bin MACOSX_BUNDLE)
 set_target_properties(
   bare_ios_bin
   PROPERTIES
-  OUTPUT_NAME bare
+  OUTPUT_NAME Bare
 
   MACOSX_BUNDLE_GUI_IDENTIFIER bare
   MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
