@@ -6,8 +6,6 @@ include(bare)
 
 install_node_modules()
 
-bare_target(target)
-
 add_subdirectory(vendor/bare-kit EXCLUDE_FROM_ALL)
 
 add_library(bare_ios OBJECT)
