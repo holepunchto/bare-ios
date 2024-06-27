@@ -1,3 +1,5 @@
+/* global Bare */
+
 Bare
   .on('suspend', () => console.log('suspended'))
   .on('resume', () => console.log('resumed'))
