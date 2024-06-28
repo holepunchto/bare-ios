@@ -8,7 +8,7 @@ install_node_modules()
 
 add_subdirectory(vendor/bare-kit EXCLUDE_FROM_ALL)
 
-add_library(bare_ios OBJECT)
+add_executable(bare_ios MACOSX_BUNDLE)
 
 set_target_properties(
   bare_ios
@@ -16,6 +16,11 @@ set_target_properties(
   C_STANDARD 99
   OBJC_STANDARD 99
   POSITION_INDEPENDENT_CODE ON
+  OUTPUT_NAME Bare
+
+  MACOSX_BUNDLE_GUI_IDENTIFIER to.holepunch.bare.ios
+  MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+  MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
 )
 
 add_bare_bundle(
@@ -35,28 +40,10 @@ target_sources(
 
 target_link_libraries(
   bare_ios
-  INTERFACE
-    "-framework UIKit"
   PUBLIC
+    "-framework UIKit"
+  PRIVATE
     bare_kit
 )
 
-add_executable(bare_ios_bin MACOSX_BUNDLE)
-
-set_target_properties(
-  bare_ios_bin
-  PROPERTIES
-  OUTPUT_NAME Bare
-
-  MACOSX_BUNDLE_GUI_IDENTIFIER to.holepunch.bare.ios
-  MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-  MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION}
-)
-
-target_link_libraries(
-  bare_ios_bin
-  PUBLIC
-    bare_ios
-)
-
-link_bare_modules(bare_ios_bin)
+link_bare_modules(bare_ios)
