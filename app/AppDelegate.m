@@ -2,7 +2,7 @@
 
 #import "AppDelegate.h"
 
-#import "main.bundle.h"
+#import "app.bundle.h"
 
 @implementation AppDelegate {
   BareWorklet *worklet;

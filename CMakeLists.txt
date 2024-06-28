@@ -19,18 +19,18 @@ set_target_properties(
 )
 
 add_bare_bundle(
-  ENTRY app/main.js
-  OUT app/main.bundle.h
+  ENTRY app/app.js
+  OUT app/app.bundle.h
   TARGET c
 )
 
 target_sources(
   bare_ios
   PRIVATE
-    app/main.bundle.h
-    app/main.m
+    app/app.bundle.h
     app/AppDelegate.h
     app/AppDelegate.m
+    app/main.m
 )
 
 target_link_libraries(
