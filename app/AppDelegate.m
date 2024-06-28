@@ -5,43 +5,39 @@
 #import "main.bundle.h"
 
 @implementation AppDelegate {
-  BareWorklet *_worklet;
+  BareWorklet *worklet;
+  BareIPC *ipc;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  _worklet = [[BareWorklet alloc] init];
+  worklet = [[BareWorklet alloc] init];
 
-  [_worklet start:@"/main.bundle"
-           source:[NSData dataWithBytes:bundle length:bundle_len]];
+  [worklet start:@"/main.bundle"
+          source:[NSData dataWithBytes:bundle length:bundle_len]];
 
-  _worklet.incoming.readabilityHandler = ^(NSFileHandle *handle) {
-    NSData *data = handle.availableData;
+  ipc = [[BareIPC alloc] initWithWorklet:worklet];
 
-    if (data.length == 0) {
-      _worklet.incoming.readabilityHandler = nil;
-      return;
-    }
+  [ipc read:NSUTF8StringEncoding
+    completion:^(NSString *data) {
+      NSLog(@"%@", data);
+    }];
 
-    NSLog(@"%.*s", (int) data.length, (char *) data.bytes);
-  };
-
-  [_worklet.outgoing writeData:[[NSData alloc]
-                                 initWithBytes:"Hello from iOS"
-                                        length:14]];
+  [ipc write:@"Hello from iOS" encoding:NSUTF8StringEncoding];
 
   return YES;
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-  [_worklet suspend];
+  [worklet suspend];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-  [_worklet resume];
+  [worklet resume];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [_worklet terminate];
+  [ipc close];
+  [worklet terminate];
 }
 
 @end
