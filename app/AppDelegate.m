@@ -7,6 +7,7 @@
 @implementation AppDelegate {
   BareWorklet *worklet;
   BareIPC *ipc;
+  BareRPC *rpc;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -17,12 +18,24 @@
 
   ipc = [[BareIPC alloc] initWithWorklet:worklet];
 
-  [ipc read:NSUTF8StringEncoding
-    completion:^(NSString *data) {
-      NSLog(@"%@", data);
-    }];
+  BareRPCRequestHandler requestHandler = ^(BareRPCIncomingRequest *req, NSError *error) {
+    if ([req.command isEqualToString:@"ping"]) {
+      CFShow([req dataWithEncoding:NSUTF8StringEncoding]);
 
-  [ipc write:@"Hello from iOS" encoding:NSUTF8StringEncoding];
+      [req reply:@"Pong from iOS" encoding:NSUTF8StringEncoding];
+    }
+  };
+
+  rpc = [[BareRPC alloc] initWithIPC:ipc requestHandler:requestHandler];
+
+  BareRPCOutgoingRequest *req = [rpc request:@"ping"];
+
+  [req send:@"Ping from iOS" encoding:NSUTF8StringEncoding];
+
+  [req reply:NSUTF8StringEncoding
+    completion:^(NSString *data, NSError *error) {
+      CFShow(data);
+    }];
 
   return YES;
 }
