@@ -2,8 +2,6 @@
 
 #import "AppDelegate.h"
 
-#import "app.bundle.h"
-
 @implementation AppDelegate {
   BareWorklet *worklet;
   BareIPC *ipc;
@@ -11,10 +9,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  NSURL *url = [[NSBundle mainBundle] URLForResource:@"app" withExtension:@"bundle"];
+
   worklet = [[BareWorklet alloc] init];
 
-  [worklet start:@"/main.bundle"
-          source:[NSData dataWithBytes:bundle length:bundle_len]];
+  [worklet start:[url path]];
 
   ipc = [[BareIPC alloc] initWithWorklet:worklet];
 

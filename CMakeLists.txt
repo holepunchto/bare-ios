@@ -25,14 +25,19 @@ set_target_properties(
 
 add_bare_bundle(
   ENTRY app/app.js
-  OUT app/app.bundle.h
-  TARGET c
+  OUT app/app.bundle
+)
+
+set_source_files_properties(
+  app/app.bundle
+  PROPERTIES
+  MACOSX_PACKAGE_LOCATION Resources
 )
 
 target_sources(
   bare_ios
   PRIVATE
-    app/app.bundle.h
+    app/app.bundle
     app/AppDelegate.h
     app/AppDelegate.m
     app/main.m

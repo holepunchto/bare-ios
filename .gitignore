@@ -5,5 +5,5 @@ prebuilds/
 scratch/
 install/
 package-lock.json
-*.bundle.h
+*.bundle
 *.d
