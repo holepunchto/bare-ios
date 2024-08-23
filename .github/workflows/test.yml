@@ -11,14 +11,21 @@ jobs:
     strategy:
       matrix:
         include:
-        - os: macos-latest
+        - os: macos-14
           platform: ios
           arch: arm64
-        - os: macos-latest
+        - os: macos-14
+          platform: ios
+          arch: arm64
+          tags: -simulator
+          flags: --simulator
+        - os: macos-14
           platform: ios
           arch: x64
+          tags: -simulator
+          flags: --simulator
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.platform }}-${{ matrix.arch }}
+    name: ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -26,10 +33,10 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: vendor/bare-kit/vendor/bare/corestore
-        key: corestore-${{ matrix.platform }}-${{ matrix.arch }}
+        key: corestore-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
     - run: npm install -g bare-dev
-    - run: bare-dev configure --debug --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} --simulator
+    - run: bare-dev configure --debug --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} ${{ matrix.flags }}
     - run: bare-dev build --debug
