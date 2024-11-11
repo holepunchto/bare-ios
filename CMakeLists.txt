@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.25)
 
-project(bare_ios C OBJC)
+find_package(cmake-bare-bundle REQUIRED PATHS node_modules/cmake-bare-bundle)
+find_package(cmake-fetch REQUIRED PATHS node_modules/cmake-fetch)
+find_package(cmake-ios REQUIRED PATHS node_modules/cmake-ios)
+find_package(cmake-npm REQUIRED PATHS node_modules/cmake-npm)
 
-include(bare)
-include(ios)
+project(bare_ios C OBJC)
 
 install_node_modules()
 
-add_subdirectory(vendor/bare-kit EXCLUDE_FROM_ALL)
+fetch_package("github:holepunchto/bare-kit")
 
 add_executable(bare_ios)
 
@@ -21,9 +23,9 @@ set_target_properties(
 )
 
 add_bare_bundle(
+  bare_ios_app
   ENTRY app/app.js
   OUT app/app.bundle
-  PREBUILDS
 )
 
 target_sources(
@@ -58,6 +60,8 @@ add_ios_iconset(
     app/icon.png 512 2x
 )
 
+get_target_property(BARE_KIT_BINARY_DIR bare_kit BINARY_DIR)
+
 add_ios_bundle(
   bare_ios_bundle
   DESTINATION Bare.app
@@ -66,4 +70,5 @@ add_ios_bundle(
   RESOURCES
     FILE app/app.bundle .
     DIR app/prebuilds prebuilds
+    DIR ${BARE_KIT_BINARY_DIR}/BareKit.framework Frameworks/BareKit.framework
 )

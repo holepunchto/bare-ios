@@ -28,15 +28,13 @@ jobs:
     name: ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     steps:
     - uses: actions/checkout@v4
-      with:
-        submodules: recursive
     - uses: actions/cache@v4
       with:
-        path: vendor/bare-kit/vendor/bare/corestore
+        path: build/_drive
         key: corestore-${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
-    - run: npm install -g bare-dev
-    - run: bare-dev configure --debug --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} ${{ matrix.flags }}
-    - run: bare-dev build --debug
+    - run: npm install -g bare-make
+    - run: bare-make generate --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} ${{ matrix.flags }} --debug
+    - run: bare-make build

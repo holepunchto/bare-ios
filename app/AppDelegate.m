@@ -13,13 +13,13 @@
 
   worklet = [[BareWorklet alloc] init];
 
-  [worklet start:[url path]];
+  [worklet start:[url path] source:nil arguments:@[]];
 
   ipc = [[BareIPC alloc] initWithWorklet:worklet];
 
   BareRPCRequestHandler requestHandler = ^(BareRPCIncomingRequest *req, NSError *error) {
     if ([req.command isEqualToString:@"ping"]) {
-      CFShow([req dataWithEncoding:NSUTF8StringEncoding]);
+      NSLog(@"%@", [req dataWithEncoding:NSUTF8StringEncoding]);
 
       [req reply:@"Pong from iOS" encoding:NSUTF8StringEncoding];
     }
@@ -33,7 +33,7 @@
 
   [req reply:NSUTF8StringEncoding
     completion:^(NSString *data, NSError *error) {
-      CFShow(data);
+      NSLog(@"%@", data);
     }];
 
   return YES;
