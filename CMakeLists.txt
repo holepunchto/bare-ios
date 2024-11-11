@@ -69,6 +69,5 @@ add_ios_bundle(
   DEPENDS bare_ios_icon
   RESOURCES
     FILE app/app.bundle .
-    DIR app/prebuilds prebuilds
     DIR ${BARE_KIT_BINARY_DIR}/BareKit.framework Frameworks/BareKit.framework
 )
