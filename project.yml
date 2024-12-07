@@ -1,0 +1,36 @@
+name: App
+include:
+  - app/addons/addons.yml
+targets:
+  App:
+    type: application
+    platform: iOS
+    deploymentTarget: 14.0
+    info:
+      path: app/Info.plist
+      properties:
+        CFBundleIdentifier: to.holepunch.bare.ios
+    dependencies:
+      - framework: app/frameworks/BareKit.xcframework
+    sources:
+      - app/AppDelegate.h
+      - app/AppDelegate.m
+      - app/app.bundle
+      - app/app.js
+      - app/main.m
+    preBuildScripts:
+      - script: |
+          PATH="${PATH}"
+
+          npx bare-link \
+            --target ios-arm64 \
+            --target ios-arm64-simulator \
+            --target ios-x64-simulator \
+            --out ${PROJECT_DIR}/app/addons \
+            ${PROJECT_DIR}
+
+          npx bare-pack \
+            --platform ios \
+            --linked \
+            --out ${PROJECT_DIR}/app/app.bundle \
+            ${PROJECT_DIR}/app/app.js

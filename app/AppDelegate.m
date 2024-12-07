@@ -4,37 +4,14 @@
 
 @implementation AppDelegate {
   BareWorklet *worklet;
-  BareIPC *ipc;
-  BareRPC *rpc;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   NSURL *url = [[NSBundle mainBundle] URLForResource:@"app" withExtension:@"bundle"];
 
-  worklet = [[BareWorklet alloc] init];
+  worklet = [[BareWorklet alloc] initWithConfiguration:nil];
 
-  [worklet start:[url path] source:nil arguments:@[]];
-
-  ipc = [[BareIPC alloc] initWithWorklet:worklet];
-
-  BareRPCRequestHandler requestHandler = ^(BareRPCIncomingRequest *req, NSError *error) {
-    if ([req.command isEqualToString:@"ping"]) {
-      NSLog(@"%@", [req dataWithEncoding:NSUTF8StringEncoding]);
-
-      [req reply:@"Pong from iOS" encoding:NSUTF8StringEncoding];
-    }
-  };
-
-  rpc = [[BareRPC alloc] initWithIPC:ipc requestHandler:requestHandler];
-
-  BareRPCOutgoingRequest *req = [rpc request:@"ping"];
-
-  [req send:@"Ping from iOS" encoding:NSUTF8StringEncoding];
-
-  [req reply:NSUTF8StringEncoding
-    completion:^(NSString *data, NSError *error) {
-      NSLog(@"%@", data);
-    }];
+  [worklet start:[url path] source:nil arguments:nil];
 
   return YES;
 }
@@ -48,7 +25,6 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-  [ipc close];
   [worklet terminate];
 }
 

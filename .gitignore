@@ -1,9 +1,8 @@
-node_modules/
 build/
-coverage/
 prebuilds/
-scratch/
-install/
+node_modules/
 package-lock.json
+Info.plist
 *.bundle
-*.d
+*.zip
+*.xcodeproj
