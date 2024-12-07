@@ -9,7 +9,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
-        SWIFT_VERSION: 6.0
+        SWIFT_VERSION: 5.0
         SWIFT_OBJC_BRIDGING_HEADER: app/App-Bridging-Header.h
     info:
       path: app/Info.plist
