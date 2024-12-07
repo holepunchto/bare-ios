@@ -22,15 +22,17 @@ targets:
       - path: app/main.m
     scheme:
       preActions:
-        - script: |
-            npx bare-link \
+        - name: Link
+          script: |
+            ${PWD}/node_modules/.bin/bare-link \
               --target ios-arm64 \
               --target ios-arm64-simulator \
               --target ios-x64-simulator \
               --out ${PWD}/app/addons \
               ${PWD}
-        - script: |
-            npx bare-pack \
+        - name: Pack
+          script: |
+            ${PWD}/node_modules/.bin/bare-pack \
               --platform ios \
               --linked \
               --out ${PWD}/app/app.bundle \
