@@ -11,27 +11,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: macos-14
+          - os: macos-latest
             platform: ios
-            arch: arm64
-          - os: macos-14
-            platform: ios
-            arch: arm64
-            tags: -simulator
-            flags: --simulator
-          - os: macos-14
-            platform: ios
-            arch: x64
-            tags: -simulator
-            flags: --simulator
     runs-on: ${{ matrix.os }}
-    name: ${{ matrix.platform }}-${{ matrix.arch }}${{ matrix.tags }}
+    name: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-      - run: bare install xcodegen
+      - run: brew install xcodegen
       - run: npm install
       - run: |
           gh release download --repo holepunchto/bare-kit v1.0.0
