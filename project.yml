@@ -13,11 +13,12 @@ targets:
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
     sources:
-      - app/AppDelegate.h
-      - app/AppDelegate.m
-      - app/app.bundle
-      - app/app.js
-      - app/main.m
+      - path: app/AppDelegate.h
+      - path: app/AppDelegate.m
+      - path: app/app.bundle
+        optional: true
+      - path: app/app.js
+      - path: app/main.m
     preBuildScripts:
       - script: |
           PATH="${PATH}"
