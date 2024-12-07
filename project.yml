@@ -6,10 +6,11 @@ targets:
     type: application
     platform: iOS
     deploymentTarget: 14.0
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
     info:
       path: app/Info.plist
-      properties:
-        CFBundleIdentifier: to.holepunch.bare.ios
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
     sources:
