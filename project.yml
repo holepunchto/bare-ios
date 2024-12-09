@@ -16,7 +16,7 @@ targets:
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
     sources:
-      - path: app/AppDelegate.swift
+      - path: app/App.swift
       - path: app/App-Bridging-Header.h
       - path: app/app.js
       - path: app/app.bundle
