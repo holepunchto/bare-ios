@@ -38,5 +38,6 @@ targets:
               --target ios-arm64-simulator \
               --target ios-x64-simulator \
               --linked \
+              --base ${PWD} \
               --out ${PWD}/app/app.bundle \
               ${PWD}/app/app.js
