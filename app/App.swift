@@ -38,13 +38,9 @@ class Worklet: ObservableObject {
   private var worklet: BareWorklet?
 
   func start() {
-    guard let url = Bundle.main.url(forResource: "app", withExtension: "bundle") else {
-      return
-    }
-
     worklet = BareWorklet(configuration: nil)
 
-    worklet?.start(url.path, source: nil, arguments: nil)
+    worklet?.start("app", ofType: "bundle", arguments: [])
   }
 
   func suspend() {
