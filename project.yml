@@ -34,7 +34,9 @@ targets:
         - name: Pack
           script: |
             ${PWD}/node_modules/.bin/bare-pack \
-              --platform ios \
+              --target ios-arm64 \
+              --target ios-arm64-simulator \
+              --target ios-x64-simulator \
               --linked \
               --out ${PWD}/app/app.bundle \
               ${PWD}/app/app.js
