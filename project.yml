@@ -25,7 +25,7 @@ targets:
       preActions:
         - name: Link
           script: |
-            ${PWD}/node_modules/.bin/bare-link \
+            PATH="${PATH}" "${PWD}/node_modules/.bin/bare-link" \
               --target ios-arm64 \
               --target ios-arm64-simulator \
               --target ios-x64-simulator \
@@ -33,7 +33,7 @@ targets:
               ${PWD}
         - name: Pack
           script: |
-            ${PWD}/node_modules/.bin/bare-pack \
+            PATH="${PATH}" "${PWD}/node_modules/.bin/bare-pack" \
               --target ios-arm64 \
               --target ios-arm64-simulator \
               --target ios-x64-simulator \
