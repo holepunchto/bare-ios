@@ -1,6 +1,10 @@
 name: App
 include:
   - app/addons/addons.yml
+packages:
+  BareKit:
+    url: https://github.com/holepunchto/bare-kit-swift
+    branch: main
 targets:
   App:
     type: application
@@ -10,14 +14,13 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
         SWIFT_VERSION: 5.0
-        SWIFT_OBJC_BRIDGING_HEADER: app/App-Bridging-Header.h
     info:
       path: app/Info.plist
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
+      - package: BareKit
     sources:
       - path: app/App.swift
-      - path: app/App-Bridging-Header.h
       - path: app/app.js
       - path: app/app.bundle
         optional: true

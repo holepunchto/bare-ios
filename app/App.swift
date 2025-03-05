@@ -1,15 +1,17 @@
 import SwiftUI
+import BareKit
 
 @main
 struct App: SwiftUI.App {
-  @StateObject private var worklet = Worklet()
+  private var worklet = Worklet()!
+
   @Environment(\.scenePhase) private var scenePhase
 
   var body: some Scene {
     WindowGroup {
       ContentView()
         .onAppear {
-          worklet.start()
+          worklet.start(name: "app", ofType: "bundle")
         }
         .onDisappear {
           worklet.terminate()
@@ -31,27 +33,5 @@ struct App: SwiftUI.App {
 struct ContentView: View {
   var body: some View {
     Text("Hello SwiftUI!")
-  }
-}
-
-class Worklet: ObservableObject {
-  private var worklet: BareWorklet?
-
-  func start() {
-    worklet = BareWorklet(configuration: nil)
-
-    worklet?.start("app", ofType: "bundle", arguments: [])
-  }
-
-  func suspend() {
-    worklet?.suspend()
-  }
-
-  func resume() {
-    worklet?.resume()
-  }
-
-  func terminate() {
-    worklet?.terminate()
   }
 }
