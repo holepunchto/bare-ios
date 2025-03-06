@@ -6,6 +6,27 @@ packages:
     url: https://github.com/holepunchto/bare-kit-swift
     branch: main
 targets:
+  NotificationServiceExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: 14.0
+    sources:
+      - path: extension/NotificationService.swift
+      - path: extension/push.js
+    info:
+      path: extension/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: "com.apple.usernotifications.service"
+          NSExtensionPrincipalClass: "NotificationServiceExtension.NotificationService"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
+        SWIFT_VERSION: 5.0
+        CODE_SIGN_ENTITLEMENTS: extension/NotificationServiceExtension.entitlements
+    dependencies:
+      - framework: app/frameworks/BareKit.xcframework
+      - package: BareKit
   App:
     type: application
     platform: iOS
@@ -14,11 +35,13 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
         SWIFT_VERSION: 5.0
+        CODE_SIGN_ENTITLEMENTS: app/App.entitlements
     info:
       path: app/Info.plist
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
       - package: BareKit
+      - target: NotificationServiceExtension
     sources:
       - path: app/App.swift
       - path: app/app.js
