@@ -6,27 +6,6 @@ packages:
     url: https://github.com/holepunchto/bare-kit-swift
     branch: main
 targets:
-  NotificationServiceExtension:
-    type: app-extension
-    platform: iOS
-    deploymentTarget: 14.0
-    sources:
-      - path: extension/NotificationService.swift
-      - path: extension/push.js
-    info:
-      path: extension/Info.plist
-      properties:
-        NSExtension:
-          NSExtensionPointIdentifier: "com.apple.usernotifications.service"
-          NSExtensionPrincipalClass: "NotificationServiceExtension.MyNotificationService"
-    settings:
-      base:
-        PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
-        SWIFT_VERSION: 5.0
-        CODE_SIGN_ENTITLEMENTS: extension/NotificationServiceExtension.entitlements
-    dependencies:
-      - framework: app/frameworks/BareKit.xcframework
-      - package: BareKit
   App:
     type: application
     platform: iOS
@@ -67,3 +46,38 @@ targets:
               --base ${PWD} \
               --out ${PWD}/app/app.bundle \
               ${PWD}/app/app.js
+  NotificationServiceExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: 14.0
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
+        SWIFT_VERSION: 5.0
+        CODE_SIGN_ENTITLEMENTS: app/NotificationServiceExtension.entitlements
+    info:
+      path: app/NotificationServiceExtension.Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.usernotifications.service
+          NSExtensionPrincipalClass: NotificationServiceExtension.NotificationService
+    dependencies:
+      - framework: app/frameworks/BareKit.xcframework
+      - package: BareKit
+    sources:
+      - path: app/NotificationService.swift
+      - path: app/push.js
+      - path: app/push.bundle
+        optional: true
+    scheme:
+      preActions:
+        - name: Pack
+          script: |
+            PATH="${PATH}" "${PWD}/node_modules/.bin/bare-pack" \
+              --target ios-arm64 \
+              --target ios-arm64-simulator \
+              --target ios-x64-simulator \
+              --linked \
+              --base ${PWD} \
+              --out ${PWD}/app/push.bundle \
+              ${PWD}/app/push.js
