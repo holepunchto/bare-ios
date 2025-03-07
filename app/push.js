@@ -1,11 +1,13 @@
-console.log('In push.js')
+console.log('Hello iOS notifcations!')
 
-BareKit.on('push', function(buffer, reply) {
-  const json = JSON.parse(buffer.toString())
-  const notification = json?.aps?.alert
-  console.log('Received push:', notification)
+BareKit.on('push', (payload, reply) => {
+  console.log('Notification received:', JSON.parse(payload))
 
-  const title = notification.title || 'BareKit'
-  const body = notification.body || 'This is the deault body'
-  reply(null, JSON.stringify({ title, body }))
+  reply(
+    null,
+    JSON.stringify({
+      title: 'Notification received',
+      body: 'This is the body'
+    })
+  )
 })
