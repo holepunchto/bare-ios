@@ -3,7 +3,7 @@ import BareKit
 
 @main
 struct App: SwiftUI.App {
-  private var worklet = Worklet()!
+  private var worklet = Worklet()
 
   @Environment(\.scenePhase) private var scenePhase
 
