@@ -1,26 +1,6 @@
 import BareKit
 import SwiftUI
 import UserNotifications
-import os.log
-
-let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "App")
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(
-    _ application: UIApplication,
-    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
-  ) {
-    let tokenString = deviceToken.map { String(format: "%02x", $0) }.joined()
-    logger.info("✅ APNs Device Token: \(tokenString)")
-  }
-
-  func application(
-    _ application: UIApplication,
-    didFailToRegisterForRemoteNotificationsWithError error: Error
-  ) {
-    logger.info("❌ Failed to register for remote notifications: \(error.localizedDescription)")
-  }
-}
 
 @main
 struct App: SwiftUI.App {
@@ -35,6 +15,7 @@ struct App: SwiftUI.App {
       ContentView()
         .onAppear {
           worklet.start(name: "app", ofType: "bundle")
+
           requestPushNotificationPermission()
         }
         .onDisappear {
@@ -52,21 +33,37 @@ struct App: SwiftUI.App {
       }
     }
   }
+
   private func requestPushNotificationPermission() {
     let center = UNUserNotificationCenter.current()
 
     center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
       if let error = error {
-        logger.info("❌ Push Notification Authorization Error: \(error.localizedDescription)")
+        print("\(error.localizedDescription)")
       } else if granted {
         DispatchQueue.main.async {
           UIApplication.shared.registerForRemoteNotifications()
-          logger.info("✅ Push Notification Authorization Granted")
         }
       } else {
-        logger.info("❌ Push Notification Authorization Denied")
+        print("Notification authorization denied")
       }
     }
+  }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken token: Data
+  ) {
+    print("Token: \(token.map { String(format: "%02x", $0) }.joined())")
+  }
+
+  func application(
+    _ application: UIApplication,
+    didFailToRegisterForRemoteNotificationsWithError error: Error
+  ) {
+    print("\(error.localizedDescription)")
   }
 }
 
