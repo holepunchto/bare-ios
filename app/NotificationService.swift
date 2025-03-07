@@ -5,7 +5,7 @@ class NotificationService: BareKit.NotificationService {
     super.init(
       resource: "push", ofType: "bundle",
       configuration: Worklet.Configuration(
-        memoryLimit: 4 * 1024 * 1024
+        memoryLimit: 8 * 1024 * 1024
       ))
   }
 }
