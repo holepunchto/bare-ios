@@ -2,6 +2,7 @@ build/
 prebuilds/
 node_modules/
 Info.plist
+*.Info.plist
 *.bundle
 *.zip
 *.xcodeproj
