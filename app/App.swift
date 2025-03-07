@@ -27,7 +27,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct App: SwiftUI.App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    private var worklet = Worklet()!
+    private var worklet = Worklet()
 
     @Environment(\.scenePhase) private var scenePhase
 

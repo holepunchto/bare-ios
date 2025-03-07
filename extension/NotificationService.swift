@@ -1,12 +1,8 @@
-import BareKitBridge
+import BareKit
 
-public class NotificationService: BareNotificationService {
-    required override init(configuration: BareWorkletConfiguration?) {
-        super.init(configuration: configuration)!
-    }
-
+class MyNotificationService: NotificationService {
     override init() {
-        super.init(resource: "push", ofType: "js", arguments: nil, configuration: BareWorkletConfiguration.default())!
+        let configuration = Worklet.Configuration()
+        super.init(resource: "push", ofType: "js", arguments: [], configuration: configuration)
     }
 }
-

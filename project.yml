@@ -18,7 +18,7 @@ targets:
       properties:
         NSExtension:
           NSExtensionPointIdentifier: "com.apple.usernotifications.service"
-          NSExtensionPrincipalClass: "NotificationServiceExtension.NotificationService"
+          NSExtensionPrincipalClass: "NotificationServiceExtension.MyNotificationService"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
