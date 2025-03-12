@@ -1,5 +1,4 @@
 import BareKit
-
 import SwiftUI
 import UserNotifications
 
@@ -14,7 +13,7 @@ struct App: SwiftUI.App {
 
   var body: some Scene {
     WindowGroup {
-      ContentView(callManager: callManager)
+      ContentView()
         .onAppear {
           pushManager.setCallManager(callManager)
           worklet.start(name: "app", ofType: "bundle")
@@ -70,23 +69,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 
 struct ContentView: View {
-  var callManager: CallManager
-
   var body: some View {
-    VStack(spacing: 20) {
-      Text("Hello SwiftUI!")
-
-      Button(action: {
-        callManager.reportIncomingCall(uuid: UUID(), handle: "John Doe")
-      }) {
-        Text("Trigger Fake Call")
-          .padding()
-          .background(Color.blue)
-          .foregroundColor(.white)
-          .cornerRadius(10)
-      }
-    }
-    .padding()
+    Text("Hello SwiftUI!")
   }
 }
-
