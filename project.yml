@@ -9,7 +9,7 @@ targets:
   App:
     type: application
     platform: iOS
-    deploymentTarget: 14.0
+    deploymentTarget: 14.5
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
@@ -23,6 +23,7 @@ targets:
       - target: NotificationServiceExtension
     sources:
       - path: app/App.swift
+      - path: app/VoIPHandler.swift
       - path: app/app.js
       - path: app/app.bundle
         optional: true
@@ -57,7 +58,7 @@ targets:
   NotificationServiceExtension:
     type: app-extension
     platform: iOS
-    deploymentTarget: 14.0
+    deploymentTarget: 14.5
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
