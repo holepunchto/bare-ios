@@ -1,12 +1,10 @@
 import BareKit
+
 import CallKit
-import OSLog
 import PushKit
 import SwiftUI
 import UserNotifications
 
-let logger = Logger(
-  subsystem: Bundle.main.bundleIdentifier ?? "com.example.BareKitExample", category: "App")
 
 @main
 struct App: SwiftUI.App {
@@ -75,16 +73,13 @@ class PushKitRegistryDelegate: NSObject, PKPushRegistryDelegate {
 
   func pushRegistry(
     _ registry: PKPushRegistry, didUpdate pushCredentials: PKPushCredentials, for type: PKPushType
-  ) {
-    let voipToken = pushCredentials.token.map { String(format: "%02x", $0) }.joined()
-    logger.debug("✅ VoIP Token: \(voipToken)")
-  }
+  ) {}
 
   func pushRegistry(
     _ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload,
     for type: PKPushType, completion: @escaping () -> Void
   ) {
-    logger.debug("🔔 Received incoming call \(payload.dictionaryPayload)")
+    print("🔔 Received incoming call \(payload.dictionaryPayload)")
 
     let caller = payload.dictionaryPayload["caller"] as? String ?? "Unknown"
 
@@ -149,20 +144,18 @@ class CallManager: NSObject, CXProviderDelegate {
 
     provider.reportNewIncomingCall(with: uuid, update: update) { error in
       if let error = error {
-        logger.error("Error reporting incoming call: \(error.localizedDescription)")
+        print("Error reporting incoming call: \(error.localizedDescription)")
       }
     }
   }
 
-  func providerDidReset(_ provider: CXProvider) {
-
-  }
+  func providerDidReset(_ provider: CXProvider) {}
 
   func provider(
     _ provider: CXProvider,
     perform action: CXAnswerCallAction
   ) {
-    logger.debug("Call answered")
+    print("Call answered")
     action.fulfill()
   }
 
@@ -170,7 +163,7 @@ class CallManager: NSObject, CXProviderDelegate {
     _ provider: CXProvider,
     perform action: CXEndCallAction
   ) {
-    logger.debug("Call ended")
+    print("Call ended")
     action.fulfill()
   }
 
