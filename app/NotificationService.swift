@@ -21,10 +21,8 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
     case "call":
       let caller = reply["caller"] as! String
 
-      CXProvider.reportNewIncomingVoIPPushPayload(["caller": caller]) { error in
-        if let error = error {
-          print("\(error.localizedDescription)")
-        }
+      Task.init {
+        try await VoIP.reportNewIncomingCall(caller: caller)
       }
 
       fallthrough

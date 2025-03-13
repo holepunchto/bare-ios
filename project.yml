@@ -4,7 +4,7 @@ include:
 packages:
   BareKit:
     url: https://github.com/holepunchto/bare-kit-swift
-    branch: main
+    branch: voip
 targets:
   App:
     type: application
@@ -31,7 +31,6 @@ targets:
       - target: NotificationServiceExtension
     sources:
       - path: app/App.swift
-      - path: app/VoIP.swift
       - path: app/app.js
       - path: app/app.bundle
         optional: true
