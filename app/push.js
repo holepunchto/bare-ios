@@ -8,6 +8,17 @@ BareKit.on('push', (payload, reply) => {
   console.log('Notification received:', alert)
 
   switch (alert.type) {
+    // Push notifications
+    case 'notification':
+      return reply(
+        null,
+        JSON.stringify({
+          type: 'notification',
+          title: alert.title,
+          body: alert.body
+        })
+      )
+
     // VoIP notification
     case 'call':
       return reply(
@@ -18,16 +29,7 @@ BareKit.on('push', (payload, reply) => {
         })
       )
 
-    // Push notifications
-    case 'notification':
     default:
-      return reply(
-        null,
-        JSON.stringify({
-          type: 'notification',
-          title: alert.title,
-          body: alert.body
-        })
-      )
+      return reply(null, null)
   }
 })

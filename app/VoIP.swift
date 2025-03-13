@@ -23,14 +23,10 @@ class VoIP: NSObject, CXProviderDelegate, PKPushRegistryDelegate {
   func providerDidReset(_ provider: CXProvider) {}
 
   func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
-    print("Call answered")
-
     action.fulfill()
   }
 
   func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
-    print("Call ended")
-
     action.fulfill()
   }
 
@@ -44,8 +40,6 @@ class VoIP: NSObject, CXProviderDelegate, PKPushRegistryDelegate {
     _ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload,
     for type: PKPushType, completion: @escaping () -> Void
   ) {
-    print("Received incoming call \(payload.dictionaryPayload)")
-
     let caller = payload.dictionaryPayload["caller"] as! String
 
     let update = CXCallUpdate()

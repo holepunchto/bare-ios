@@ -13,13 +13,12 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
     delegate = self
   }
 
-  func workletDidReply(_ reply: [AnyHashable: Any]) -> UNNotificationContent {
-    let content = UNMutableNotificationContent()
-
+  override func workletDidReply(_ reply: [AnyHashable: Any]) -> UNNotificationContent {
     switch reply["type"] as? String {
-    case "call":
-      print("Received call push")
+    case "notification":
+      return super.workletDidReply(reply)
 
+    case "call":
       let caller = reply["caller"] as! String
 
       CXProvider.reportNewIncomingVoIPPushPayload(["caller": caller]) { error in
@@ -28,20 +27,10 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
         }
       }
 
-      break
-
-    case "notification":
-      print("Received notification push")
-
-      content.title = reply["title"] as! String
-      content.body = reply["body"] as! String
-
-      break
+      fallthrough
 
     default:
-      break
+      return UNNotificationContent()
     }
-
-    return content
   }
 }
