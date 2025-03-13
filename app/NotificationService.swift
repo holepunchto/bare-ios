@@ -20,7 +20,7 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
     case "call":
       print("Received call push")
 
-      let caller = reply["caller"] as? String ?? "Anonymous"
+      let caller = reply["caller"] as! String
 
       CXProvider.reportNewIncomingVoIPPushPayload(["caller": caller]) { error in
         if let error = error {
@@ -33,8 +33,8 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
     case "notification":
       print("Received notification push")
 
-      content.title = reply["title"] as? String ?? "Hello!"
-      content.body = reply["body"] as? String ?? "World!"
+      content.title = reply["title"] as! String
+      content.body = reply["body"] as! String
 
       break
 
