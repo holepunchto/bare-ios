@@ -5,9 +5,9 @@ import UserNotifications
 @main
 struct App: SwiftUI.App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-  private var worklet = Worklet()
-  private let callManager = CallManager()
-  private var pushManager = PushKitRegistryDelegate()
+
+  private let worklet = Worklet()
+  private let voip = VoIP()
 
   @Environment(\.scenePhase) private var scenePhase
 
@@ -15,8 +15,8 @@ struct App: SwiftUI.App {
     WindowGroup {
       ContentView()
         .onAppear {
-          pushManager.setCallManager(callManager)
           worklet.start(name: "app", ofType: "bundle")
+
           requestPushNotificationPermission()
         }
         .onDisappear {
@@ -57,7 +57,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     _ application: UIApplication,
     didRegisterForRemoteNotificationsWithDeviceToken token: Data
   ) {
-    print("Token: \(token.map { String(format: "%02x", $0) }.joined())")
+    print("Notification token: \(token.map { String(format: "%02x", $0) }.joined())")
   }
 
   func application(

@@ -23,7 +23,7 @@ targets:
       - target: NotificationServiceExtension
     sources:
       - path: app/App.swift
-      - path: app/VoIPHandler.swift
+      - path: app/VoIP.swift
       - path: app/app.js
       - path: app/app.bundle
         optional: true
