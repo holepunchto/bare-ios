@@ -1,5 +1,4 @@
 import BareKit
-import CallKit
 import UserNotifications
 
 class NotificationService: BareKit.NotificationService, BareKit.NotificationServiceDelegate {
