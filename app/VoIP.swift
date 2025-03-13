@@ -46,7 +46,7 @@ class VoIP: NSObject, CXProviderDelegate, PKPushRegistryDelegate {
   ) {
     print("Received incoming call \(payload.dictionaryPayload)")
 
-    let caller = payload.dictionaryPayload["caller"] as? String ?? "Unknown"
+    let caller = payload.dictionaryPayload["caller"] as! String
 
     let update = CXCallUpdate()
     update.remoteHandle = CXHandle(type: .generic, value: caller)
