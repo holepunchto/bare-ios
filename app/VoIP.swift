@@ -22,19 +22,15 @@ class VoIP: NSObject, CXProviderDelegate, PKPushRegistryDelegate {
 
   func providerDidReset(_ provider: CXProvider) {}
 
-  func provider(
-    _ provider: CXProvider,
-    perform action: CXAnswerCallAction
-  ) {
+  func provider(_ provider: CXProvider, perform action: CXAnswerCallAction) {
     print("Call answered")
+
     action.fulfill()
   }
 
-  func provider(
-    _ provider: CXProvider,
-    perform action: CXEndCallAction
-  ) {
+  func provider(_ provider: CXProvider, perform action: CXEndCallAction) {
     print("Call ended")
+
     action.fulfill()
   }
 
