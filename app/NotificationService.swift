@@ -14,30 +14,34 @@ class NotificationService: BareKit.NotificationService, BareKit.NotificationServ
   }
 
   func workletDidReply(_ reply: [AnyHashable: Any]) -> UNNotificationContent {
-    if let type = reply["type"] as? String {
-      switch type {
-      case "call":
-        print("Received call push")
-        let caller = reply["caller"] as? String ?? "Anonymous"
+    let content = UNMutableNotificationContent()
 
-        CXProvider.reportNewIncomingVoIPPushPayload(["caller": caller]) { error in
-          if let error = error {
-            print("\(error)")
-          }
+    switch reply["type"] as? String {
+    case "call":
+      print("Received call push")
+
+      let caller = reply["caller"] as? String ?? "Anonymous"
+
+      CXProvider.reportNewIncomingVoIPPushPayload(["caller": caller]) { error in
+        if let error = error {
+          print("\(error.localizedDescription)")
         }
-        return UNNotificationContent()  // Silence the notification
-
-      case "notif":
-        print("Received notification push")
-        let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = reply["title"] as? String ?? "Hello!"
-        notificationContent.body = reply["body"] as? String ?? "World!"
-        return notificationContent
-
-      default:
-        return UNNotificationContent()
       }
+
+      break
+
+    case "notification":
+      print("Received notification push")
+
+      content.title = reply["title"] as? String ?? "Hello!"
+      content.body = reply["body"] as? String ?? "World!"
+
+      break
+
+    default:
+      break
     }
-    return UNNotificationContent()
+
+    return content
   }
 }
