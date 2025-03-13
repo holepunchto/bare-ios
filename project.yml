@@ -16,6 +16,9 @@ targets:
         SWIFT_VERSION: 5.0
     info:
       path: app/Info.plist
+      properties:
+        UIBackgroundModes:
+          - voip
     entitlements:
       path: app/App.entitlements
       properties:
