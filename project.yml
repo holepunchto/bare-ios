@@ -4,18 +4,21 @@ include:
 packages:
   BareKit:
     url: https://github.com/holepunchto/bare-kit-swift
-    branch: main
+    branch: voip
 targets:
   App:
     type: application
     platform: iOS
-    deploymentTarget: 14.0
+    deploymentTarget: 14.5
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
         SWIFT_VERSION: 5.0
     info:
       path: app/Info.plist
+      properties:
+        UIBackgroundModes:
+          - voip
     entitlements:
       path: app/App.entitlements
       properties:
@@ -62,7 +65,7 @@ targets:
   NotificationServiceExtension:
     type: app-extension
     platform: iOS
-    deploymentTarget: 14.0
+    deploymentTarget: 14.5
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension

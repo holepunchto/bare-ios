@@ -6,7 +6,8 @@ import UserNotifications
 struct App: SwiftUI.App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-  private var worklet = Worklet()
+  private let worklet = Worklet()
+  private let voip = VoIP()
 
   @Environment(\.scenePhase) private var scenePhase
 
@@ -56,7 +57,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     _ application: UIApplication,
     didRegisterForRemoteNotificationsWithDeviceToken token: Data
   ) {
-    print("Token: \(token.map { String(format: "%02x", $0) }.joined())")
+    print("Notification token: \(token.map { String(format: "%02x", $0) }.joined())")
   }
 
   func application(

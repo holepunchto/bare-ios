@@ -1,13 +1,35 @@
 console.log('Hello iOS notifcations!')
 
 BareKit.on('push', (payload, reply) => {
-  console.log('Notification received:', JSON.parse(payload))
+  const {
+    aps: { alert }
+  } = JSON.parse(payload)
 
-  reply(
-    null,
-    JSON.stringify({
-      title: 'Notification received',
-      body: 'This is the body'
-    })
-  )
+  console.log('Notification received:', alert)
+
+  switch (alert.type) {
+    // Push notification
+    case 'notification':
+      return reply(
+        null,
+        JSON.stringify({
+          type: 'notification',
+          title: alert.title,
+          body: alert.body
+        })
+      )
+
+    // VoIP notification
+    case 'call':
+      return reply(
+        null,
+        JSON.stringify({
+          type: 'call',
+          caller: alert.caller
+        })
+      )
+
+    default:
+      return reply(null, null)
+  }
 })
