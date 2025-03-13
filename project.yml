@@ -17,6 +17,12 @@ targets:
         CODE_SIGN_ENTITLEMENTS: app/App.entitlements
     info:
       path: app/Info.plist
+    entitlements:
+      path: app/App.entitlements
+      properties:
+        aps-environment: development
+        com.apple.security.application-groups:
+          - group.to.holepunch.bare.ios
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
       - package: BareKit
@@ -70,6 +76,12 @@ targets:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.usernotifications.service
           NSExtensionPrincipalClass: NotificationServiceExtension.NotificationService
+    entitlements:
+      path: app/NotificationServiceExtension.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.to.holepunch.bare.ios
+        com.apple.developer.usernotifications.filtering: true
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
       - package: BareKit
