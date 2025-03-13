@@ -8,7 +8,7 @@ BareKit.on('push', (payload, reply) => {
   console.log('Notification received:', alert)
 
   switch (alert.type) {
-    // Push notifications
+    // Push notification
     case 'notification':
       return reply(
         null,
