@@ -14,7 +14,6 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
         SWIFT_VERSION: 5.0
-        CODE_SIGN_ENTITLEMENTS: app/App.entitlements
     info:
       path: app/Info.plist
     entitlements:
@@ -68,7 +67,6 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios.NotificationServiceExtension
         SWIFT_VERSION: 5.0
-        CODE_SIGN_ENTITLEMENTS: app/NotificationServiceExtension.entitlements
     info:
       path: app/NotificationServiceExtension.Info.plist
       properties:
