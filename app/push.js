@@ -1,4 +1,4 @@
-console.log('Hello iOS notifcations!')
+console.log('Hello iOS notifications!')
 
 BareKit.on('push', (payload, reply) => {
   const {
