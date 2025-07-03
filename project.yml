@@ -9,7 +9,7 @@ targets:
   App:
     type: application
     platform: iOS
-    deploymentTarget: 14.0
+    deploymentTarget: 18.4
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: to.holepunch.bare.ios
@@ -22,6 +22,7 @@ targets:
         aps-environment: development
         com.apple.security.application-groups:
           - group.to.holepunch.bare.ios
+        com.apple.security.cs.allow-jit: true
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
       - package: BareKit

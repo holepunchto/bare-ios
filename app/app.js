@@ -1,1 +1,1 @@
-console.log('Hello iOS!')
+console.log(Bare)
