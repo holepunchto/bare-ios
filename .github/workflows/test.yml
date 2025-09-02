@@ -23,7 +23,7 @@ jobs:
       - run: brew install xcodegen
       - run: npm install
       - run: |
-          gh release download --repo holepunchto/bare-kit v1.9.0
+          gh release download --repo holepunchto/bare-kit v1.9.5
           unzip prebuilds.zip "ios/*" -d prebuilds/
           mv prebuilds/ios/BareKit.xcframework app/frameworks/
         env:
