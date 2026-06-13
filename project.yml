@@ -5,6 +5,13 @@ packages:
   BareKit:
     url: https://github.com/holepunchto/bare-kit-swift
     branch: main
+  BareRPC:
+    url: https://github.com/holepunchto/bare-rpc-swift
+    branch: main
+  Schema:
+    path: node_modules/bare-switch-core/spec/schema
+  HRPC:
+    path: node_modules/bare-switch-core/spec/hrpc
 targets:
   App:
     type: application
@@ -16,6 +23,8 @@ targets:
         SWIFT_VERSION: 5.0
     info:
       path: app/Info.plist
+      properties:
+        NSLocalNetworkUsageDescription: Connects to nearby peers running this app to sync the switch.
     entitlements:
       path: app/App.entitlements
       properties:
@@ -26,10 +35,15 @@ targets:
     dependencies:
       - framework: app/frameworks/BareKit.xcframework
       - package: BareKit
+      - package: BareRPC
+      - package: Schema
+      - package: HRPC
       - target: NotificationServiceExtension
     sources:
       - path: app/App.swift
-      - path: app/app.js
+      - path: app/BareTransport.swift
+      - path: app/SyncModel.swift
+      - path: app/ContentView.swift
       - path: app/app.bundle
         optional: true
     scheme:
@@ -44,9 +58,10 @@ targets:
           script: |
             PATH="${PATH}" "${PWD}/node_modules/.bin/bare-pack" \
               --preset ios \
+              --linked \
               --base ${PWD} \
               --out ${PWD}/app/app.bundle \
-              ${PWD}/app/app.js
+              ${PWD}/node_modules/bare-switch-core/backend.js
             PATH="${PATH}" "${PWD}/node_modules/.bin/bare-pack" \
               --preset ios \
               --base ${PWD} \

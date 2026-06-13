@@ -1,3 +1,5 @@
+/* global BareKit */
+
 console.log('Hello iOS notifications!')
 
 BareKit.on('push', (payload, reply) => {

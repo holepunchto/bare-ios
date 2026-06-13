@@ -1,44 +1,37 @@
 # Bare on iOS
 
-Example of embedding Bare in an iOS application using <https://github.com/holepunchto/bare-kit>.
+A peer-to-peer **shared switch** for iOS - the iOS shell over
+[bare-switch-core](https://github.com/holepunchto/bare-switch-core), the same
+core that powers [bare-macos](https://github.com/holepunchto/bare-macos). Flip
+the switch on one device and it flips on every other copy, connected directly
+device to device with no server. (It also keeps a Bare-powered push-notification
+service extension as a second worklet.)
 
 ## Building
 
-To keep the build process fast and efficient, the project relies on a Bare Kit prebuild being available in the [`app/frameworks/`](app/frameworks) directory. Prior to building the project, you must therefore either clone and compile Bare Kit from source, or download the latest prebuild from GitHub. The latter is easily accomplished using the [GitHub CLI](https://cli.github.com):
+One-time setup:
 
-```console
-gh release download --repo holepunchto/bare-kit <version>
-```
-
-Unpack the resulting `prebuilds.zip` archive and move `ios/BareKit.xcframework` into [`app/frameworks/`](app/frameworks). When finished, generate the Xcode project files using <https://github.com/yonaskolb/XcodeGen>:
-
-```console
+```sh
+npm install
+gh release download --repo holepunchto/bare-kit v2.1.3 --pattern prebuilds.zip
+unzip prebuilds.zip "ios/*" -d prebuilds/
+mv prebuilds/ios/BareKit.xcframework app/frameworks/
 xcodegen generate
 ```
 
-Then, either open the project in Xcode or build it from the commandline:
+Then build (or open in Xcode):
 
-```console
-xcodebuild -scheme App build
+```sh
+xcodebuild -scheme App -sdk iphonesimulator build
 ```
 
-### Addons
+The scheme's pre-actions link the native addons (`bare-link`) and pack two
+worklets: the switch (`bare-switch-core`'s `backend.js` -> `app.bundle`) and the
+push handler (`app/push.js` -> `push.bundle`).
 
-Native addons will be linked into [`app/addons/`](app/addons) as part of the build process and must be referenced in [`app/addons/addons.yml`](app/addons/addons.yml) to ensure that Xcode copies them to the final app bundle. After installing `bare-addon` v1.2.3, for example, do:
-
-```diff
- targets:
-   App:
--    dependencies: []
-+    dependencies:
-+      - framework: bare-addon.1.2.3.xcframework
-```
-
-Make sure to regenerate the project files after editing the addons list:
-
-```console
-xcodegen generate
-```
+To change the switch protocol or worklet, edit
+[bare-switch-core](https://github.com/holepunchto/bare-switch-core); this repo
+consumes its committed, generated bindings.
 
 ## License
 
