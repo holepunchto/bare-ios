@@ -1,11 +1,6 @@
 # Bare on iOS
 
-A peer-to-peer **shared switch** for iOS - the iOS shell over
-[bare-switch-core](https://github.com/holepunchto/bare-switch-core), the same
-core that powers [bare-macos](https://github.com/holepunchto/bare-macos). Flip
-the switch on one device and it flips on every other copy, connected directly
-device to device with no server. (It also keeps a Bare-powered push-notification
-service extension as a second worklet.)
+A peer-to-peer **shared switch** for iOS - the iOS shell over [bare-switch-core](https://github.com/holepunchto/bare-switch-core), the same core that powers [bare-macos](https://github.com/holepunchto/bare-macos). Flip the switch on one device and it flips on every other copy, connected directly device to device with no server. (It also keeps a Bare-powered push-notification service extension as a second worklet.)
 
 ## Building
 
@@ -25,13 +20,9 @@ Then build (or open in Xcode):
 xcodebuild -scheme App -sdk iphonesimulator build
 ```
 
-The scheme's pre-actions link the native addons (`bare-link`) and pack two
-worklets: the switch (`bare-switch-core`'s `backend.js` -> `app.bundle`) and the
-push handler (`app/push.js` -> `push.bundle`).
+The scheme's pre-actions link the native addons (`bare-link`) and pack two worklets: the switch (`bare-switch-core`'s `backend.js` -> `app.bundle`) and the push handler (`app/push.js` -> `push.bundle`).
 
-To change the switch protocol or worklet, edit
-[bare-switch-core](https://github.com/holepunchto/bare-switch-core); this repo
-consumes its committed, generated bindings.
+To change the switch protocol or worklet, edit [bare-switch-core](https://github.com/holepunchto/bare-switch-core); this repo consumes its committed, generated bindings.
 
 ## License
 
