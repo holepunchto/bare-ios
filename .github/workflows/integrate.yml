@@ -1,0 +1,34 @@
+name: Integrate
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  lint:
+    runs-on: macos-latest
+    name: Lint
+    steps:
+      - uses: holepunchto/actions/node-base@v1
+      - uses: holepunchto/actions/setup-swift@v1
+      - run: npm run lint
+      - run: swift format lint --strict --recursive app
+  build:
+    runs-on: macos-latest
+    name: Build
+    steps:
+      - uses: holepunchto/actions/node-base@v1
+      - uses: holepunchto/actions/setup-swift@v1
+      - run: brew install xcodegen
+      - run: |
+          gh release download --repo holepunchto/bare-kit v2.1.3
+          unzip prebuilds.zip "ios/*" -d prebuilds/
+          mv prebuilds/ios/BareKit.xcframework app/frameworks/
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - run: xcodegen generate
+      - run: xcodebuild -scheme App build CODE_SIGNING_ALLOWED=NO

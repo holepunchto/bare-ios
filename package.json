@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "Example of embedding Bare in an iOS application",
   "scripts": {
-    "test": "prettier . --check"
+    "format": "prettier --write . && lunte --fix",
+    "lint": "prettier --check . && lunte"
   },
   "repository": {
     "type": "git",
@@ -16,9 +17,13 @@
     "url": "https://github.com/holepunchto/bare-ios/issues"
   },
   "homepage": "https://github.com/holepunchto/bare-ios#readme",
+  "dependencies": {
+    "bare-switch-core": "^1.0.1"
+  },
   "devDependencies": {
-    "bare-link": "^1.2.0",
-    "bare-pack": "^1.3.0",
+    "bare-link": "^3.2.2",
+    "bare-pack": "^2.1.0",
+    "lunte": "^1.8.0",
     "prettier": "^3.4.2",
     "prettier-config-holepunch": "^2.0.0"
   }

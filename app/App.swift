@@ -6,28 +6,23 @@ import UserNotifications
 struct App: SwiftUI.App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-  private var worklet = Worklet()
+  @StateObject private var model = SyncModel()
 
   @Environment(\.scenePhase) private var scenePhase
 
   var body: some Scene {
     WindowGroup {
-      ContentView()
+      ContentView(model: model)
         .onAppear {
-          worklet.start(name: "app", ofType: "bundle")
-
           requestPushNotificationPermission()
-        }
-        .onDisappear {
-          worklet.terminate()
         }
     }
     .onChange(of: scenePhase) { phase in
       switch phase {
       case .background:
-        worklet.suspend()
+        model.suspend()
       case .active:
-        worklet.resume()
+        model.resume()
       default:
         break
       }
@@ -64,11 +59,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     didFailToRegisterForRemoteNotificationsWithError error: Error
   ) {
     print("\(error.localizedDescription)")
-  }
-}
-
-struct ContentView: View {
-  var body: some View {
-    Text("Hello SwiftUI!")
   }
 }
