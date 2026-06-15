@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/holepunchto/bare-ios#readme",
   "dependencies": {
-    "bare-switch-core": "file:../bare-switch-core"
+    "bare-switch-core": "^1.0.1"
   },
   "devDependencies": {
     "bare-link": "^3.2.2",
