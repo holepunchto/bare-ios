@@ -31,4 +31,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
       - run: xcodegen generate
-      - run: xcodebuild -scheme App -sdk iphonesimulator build CODE_SIGNING_ALLOWED=NO
+      - run: xcodebuild -scheme App build CODE_SIGNING_ALLOWED=NO

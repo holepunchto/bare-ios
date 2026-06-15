@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "Example of embedding Bare in an iOS application",
   "scripts": {
-    "lint": "prettier --check . && lunte",
-    "format": "prettier --write . && lunte --fix"
+    "format": "prettier --write . && lunte --fix",
+    "lint": "prettier --check . && lunte"
   },
   "repository": {
     "type": "git",
