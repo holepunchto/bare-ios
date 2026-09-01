@@ -1,11 +1,11 @@
 targets:
   App:
     dependencies:
-      - framework: bare-buffer.3.6.1.xcframework
-      - framework: bare-fs.4.7.2.xcframework
-      - framework: bare-inspect.3.1.4.xcframework
-      - framework: bare-os.3.9.1.xcframework
+      - framework: bare-buffer.3.7.0.xcframework
+      - framework: bare-fs.4.8.1.xcframework
+      - framework: bare-inspect.3.1.5.xcframework
+      - framework: bare-path.3.1.1.xcframework
       - framework: bare-type.1.1.0.xcframework
-      - framework: bare-url.2.4.5.xcframework
+      - framework: bare-url.2.5.2.xcframework
       - framework: sodium-native.5.1.0.xcframework
-      - framework: udx-native.1.20.7.xcframework
+      - framework: udx-native.1.21.1.xcframework
